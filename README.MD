@@ -96,3 +96,5 @@ Amazon -> Link to Products
 - Update Package.json
 - Create Gitignore
 - Create Controllers for Routes
+- Create Connection to DB
+- Add User Model For Login
