@@ -7,6 +7,14 @@ I have decided to build one;
 
 ## Parts Broken Out Into;
 
+### Car Gallery 
+
+- Images to Showcase Interior And Exterior
+- Engine Bay
+- Detail Skills and items used;
+- Link to Facebook Marketplace $ 
+- Link to Youtube?
+
 ### Car Maintenance
 I belive with Cars These Days Oil Changes can be done in 5-6k Ranges;
 With That Said
@@ -62,7 +70,7 @@ MISC Purchases
 
 Cost of Ownership
 
-### API's Used
+### API's Used and ideas
 
 Trello Design / CRUD
 - Calender and Board Reversible -> Left and Right
@@ -72,7 +80,19 @@ Trello Design / CRUD
 - Maintenance = Blue
 - Repairs = Green
 
-Board to Track Monthly?
+Board to Track Monthly? -> Expenses Automated
+Board to Track Hours Spent ->
 Calender
-Calculator
+Calculator - 
 Amazon -> Link to Products 
+
+
+
+
+### 
+- Create Repo
+- NPM to Create Files
+- Update Readme
+- Update Package.json
+- Create Gitignore
+- Create Controllers for Routes
