@@ -2,6 +2,7 @@ const router = require("express").Router();
 const { UniqueConstraintError } = require("sequelize/lib/errors");
 const { UserModel } = require("../models");
 const jwt = require("jsonwebtoken")
+const bcrypt = require("bcryptjs")
 
 router.post("/register", async(req,res) => {
 
@@ -10,10 +11,10 @@ router.post("/register", async(req,res) => {
     try {
         const User = await UserModel.create({
             email,
-            password
+            password: bcrypt.hashSync(password, 13),
         })
 
-        let token = jwt.sign({id: User.id}, "i_am_secret", {expiresIn: 60 * 60 * 24});
+        let token = jwt.sign({id: User.id}, process.env.JWT_SECRET, {expiresIn: 60 * 60 * 24});
     
         res.status(201).json({
             message: "User successfully registered",
@@ -47,16 +48,25 @@ router.post("/login", async (req,res) =>{
 
         if(loginUser){
 
-            let token = jwt.sign({id: loginUser.id}, 'i_am_secret', {expiresIn: 60*60*24})
+            let passwordComparison = await bcrypt.compare(password, loginUser.password);
 
-            res.status(201).json({
-                message: "User Successfully Logged In",
-                user: loginUser,
-                sessionToken: token
-            })
+            if (passwordComparison) {
+                let token = jwt.sign({id: loginUser.id}, 'i_am_secret', {expiresIn: 60*60*24})
+
+                res.status(201).json({
+                    message: "User Successfully Logged In",
+                    user: loginUser,
+                    sessionToken: token
+                })
+            } else {
+                res.status(401).json({
+                    message: "Incorrect email or password"
+                })
+            }
+
         } else {
             res.status(401).json({
-                message: "Login Failed"
+                message: "Incorrect email or password"
             })
         }
     } catch (err) {
