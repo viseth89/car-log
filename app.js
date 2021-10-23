@@ -4,8 +4,9 @@ const dbConnection = require("./db")
 
 const controllers = require("./controllers");
 
-app.use('/journal', controllers.journalController);
+app.use(Express.json())
 
+app.use('/journal', controllers.journalController);
 app.use('/user', controllers.usercontroller);
 
 dbConnection.authenticate()
