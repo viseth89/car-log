@@ -46,9 +46,13 @@ router.post("/login", async (req,res) =>{
         })
 
         if(loginUser){
+
+            let token = jwt.sign({id: loginUser.id}, 'i_am_secret', {expiresIn: 60*60*24})
+
             res.status(201).json({
                 message: "User Successfully Logged In",
-                user: loginUser
+                user: loginUser,
+                sessionToken: token
             })
         } else {
             res.status(401).json({
