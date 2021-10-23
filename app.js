@@ -7,8 +7,11 @@ const controllers = require("./controllers");
 
 app.use(Express.json())
 
-app.use('/journal', controllers.journalController);
 app.use('/user', controllers.usercontroller);
+
+app.use('/journal', controllers.journalController);
+
+app.use(require("./middleware/validate-jwt"))
 
 dbConnection.authenticate()
     .then(() => dbConnection.sync())
