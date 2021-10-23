@@ -6,6 +6,8 @@ const controllers = require("./controllers");
 
 app.use('/journal', controllers.journalController);
 
+app.use('/user', controllers.usercontroller);
+
 dbConnection.authenticate()
     .then(() => dbConnection.sync())
     .then(() => {

@@ -98,3 +98,20 @@ Amazon -> Link to Products
 - Create Controllers for Routes
 - Create Connection to DB
 - Add User Model For Login
+
+
+
+####
+- Separate into Features :
+- User Auth - 
+- Car Posting - Pictures / DB 
+- Logs/Journal -> Trello Style -> 2nd Feature -> Calendar API on rightside;
+- 
+
+####
+- Log into Facebook
+- Upload Images/Videos
+- Pull images from facebook
+- Link to Facebook Marketplace
+- Link to Carvana/Carfax
+- Link to Craigslist/Offerup
