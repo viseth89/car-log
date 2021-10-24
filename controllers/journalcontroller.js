@@ -33,9 +33,75 @@ router.post("/create", validateJWT, async (req, res) => {
     } catch (err) {
         res.status(500).json({ error: err })
     }
-    JournalModel.create(journalEntry)
+})
+
+/* 
+Journal Get */
+
+router.get("/", async(req, res) => {
+    try {
+        const entries = await JournalModel.findAll();
+        res.status(200).json(entries);
+    } catch (err) {
+        res.status(500).json({ error: err });
+    }
 })
 
 
+router.get("/mine", validateJWT, async (req, res) => {
+    const { id } = req.user;
+    try {
+        const userJournals = await JournalModel.findAll({
+            where: {
+                owner: id
+            }
+        });
+        res.status(200).json(userJournals);
+    } catch (err) {
+        res.status(500).json({ error: err });
+    }
+});
+
+router.get("/:title", async (req, res) => {
+    const {title} = req.params;
+    try {
+        const results = await JournalModel.findAll({
+            where: { title: title }
+        });
+        res.status(200).json(results);
+    } catch (err) {
+        res.status(500).json({error:err})
+    }
+})
+
+/* 
+Update Journal
+*/
+
+router.put("/update/:entryId", validateJWT, async (req, res) => {
+    const { title, date, entry } = req.body.journal;
+    const journalId = req.params.entryId;
+    const userId = req.user.id;
+
+    const query = {
+        where: {
+            id: journalId,
+            owner: userId
+        }
+    };
+
+    const updatedJournal = {
+        title: title,
+        date: date,
+        entry: entry
+    };
+
+    try {
+        const update = await JournalModel.update(updatedJournal, query);
+        res.status(200).json(update);
+    } catch (err) {
+        res.status(500).json({error: err});
+    }
+});
 
 module.exports = router;
